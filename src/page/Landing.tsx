@@ -31,12 +31,14 @@ const Landing = () => {
 
     const handleSubmit = async (e: React.FormEvent | React.KeyboardEvent) => {
         e.preventDefault();
+
+        // Clear the input field immediately
+        setPrompt('');
         setLoading(true);
 
         try {
             const response = await getFineTunedResponse(prompt);
             setAnswer(response ?? '');
-
         } catch (error) {
             console.error("에러 발생:", error);
         } finally {
