@@ -65,7 +65,7 @@ const Landing = () => {
                         <Loading />
                     ) : (
                         showGreeting ? (
-                            <p>저희 학교에 대해 궁금하신것이 있으신가요 ?</p>
+                            <p className='answer-ex'>저희 학교에 대해 궁금하신것이 있으신가요 ?</p>
                         ) : (
                             <p className='answer'>{answer}</p>
                         )
