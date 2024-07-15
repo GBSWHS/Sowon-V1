@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Logo from '../assets/sowon.webp';
 import '../style/Landing.scss';
 import { getFineTunedResponse } from '../api';
@@ -18,6 +18,7 @@ const Loading = () => (
 const Landing = () => {
     const [prompt, setPrompt] = useState('');
     const [answer, setAnswer] = useState('');
+    const [displayedAnswer, setDisplayedAnswer] = useState('');
     const [loading, setLoading] = useState(false);
     const [showGreeting, setShowGreeting] = useState(true);
 
@@ -43,18 +44,34 @@ const Landing = () => {
         e.preventDefault();
         setLoading(true);
         setShowGreeting(false);
+        setAnswer('');
+        setDisplayedAnswer('');
 
         try {
             const response = await getFineTunedResponse(prompt);
-            setAnswer(response ?? '');
+            setAnswer(response || '');
         } catch (error) {
-            console.error("에러 발생:", error);
+            setAnswer('에러가 발생했습니다. 다시 시도해 주세요.');
         } finally {
             setLoading(false);
             setPrompt('');
             focusInput();
         }
     };
+
+    useEffect(() => {
+        if (answer) {
+            let index = -1;
+            const interval = setInterval(() => {
+                setDisplayedAnswer(prev => prev + answer[index]);
+                index += 1;
+                if (index === answer.length - 1) {
+                    clearInterval(interval);
+                }
+            }, 50);
+            return () => clearInterval(interval);
+        }
+    }, [answer]);
 
     return (
         <div className='background'>
@@ -65,9 +82,9 @@ const Landing = () => {
                         <Loading />
                     ) : (
                         showGreeting ? (
-                            <p className='answer-ex'>저희 학교에 대해 궁금하신것이 있으신가요 ?</p>
+                            <p>저희 학교에 대해 궁금하신것이 있으신가요 ?</p>
                         ) : (
-                            <p className='answer'>{answer}</p>
+                            <p className='answer'>{displayedAnswer}</p>
                         )
                     )}
                 </div>
