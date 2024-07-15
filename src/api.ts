@@ -14,8 +14,14 @@ export async function getFineTunedResponse(prompt: string) {
           role: "system",
           content: "경소마고는 경북소프트웨어마이스터고등학교 입니다",
         },
-        { role: "system", content: "저는 경소마고의 마스코트 소원이 입니다" },
-        { role: "user", content: prompt },
+        {
+          role: "system",
+          content: "저는 경소마고의 마스코트 소원이 입니다",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
       ],
       max_tokens: 100,
       temperature: 0.2,
