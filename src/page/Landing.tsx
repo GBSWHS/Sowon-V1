@@ -52,7 +52,7 @@ const Landing = () => {
         } finally {
             setLoading(false);
             setPrompt('');
-            focusInput(); // Focus the input field after clearing it
+            focusInput();
         }
     };
 
