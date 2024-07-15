@@ -191,3 +191,66 @@ body {
     opacity: 0.4;
   }
 }
+
+@media (min-width: 375px) and (max-width: 460px) {
+  .landing {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  .message-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .answer-ex,
+  .answer {
+    font-size: 14px;
+  }
+
+  .answer {
+    margin-top: 20px;
+  }
+
+  .input-container {
+    width: 300px;
+    max-width: 410px;
+    height: 40px;
+    padding: 0 15px;
+    background-color: $gray;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 30px;
+    position: relative;
+  }
+
+  .input-box {
+    flex-grow: 1;
+  }
+
+  .chat-input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-radius: 25px;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .chat-input::placeholder {
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
