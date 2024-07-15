@@ -12,7 +12,6 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: $white;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,19 +20,150 @@ body {
 
 .landing {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo {
   width: 60px;
 }
 
-.chat-input {
-  width: 500px;
+.input-container {
+  width: 380px;
   height: 45px;
   padding: 0 15px;
   background-color: $gray;
-  outline: none;
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 25px;
   margin-top: 30px;
+}
+
+.input-box {
+  flex-grow: 1;
+}
+
+.chat-input {
+  width: 370px;
+  outline: none;
+  border: none;
+  background: transparent;
+  border-radius: 25px;
+  margin-left: 20px;
+}
+
+button {
+  height: 45px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 25px;
+  background-color: #e93135;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d6272b;
+}
+
+.answer {
+  margin-top: 50px;
+}
+
+// ----------------------------------------
+
+.typing-indicator {
+  width: 60px;
+  height: 30px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.typing-circle {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  border-radius: 50%;
+  transform-origin: 50%;
+  animation: typing-circle7124 0.5s alternate infinite ease;
+}
+
+.typing-circle-1 {
+  background-color: #e93135;
+  left: 15%;
+}
+
+.typing-circle-2 {
+  background-color: #006cb5;
+  left: 45%;
+  animation-delay: 0.2s;
+}
+
+.typing-circle-3 {
+  background-color: #67bee5;
+  left: auto;
+  right: 15%;
+  animation-delay: 0.3s;
+}
+
+@keyframes typing-circle7124 {
+  0% {
+    top: 20px;
+    height: 5px;
+    border-radius: 50px 50px 25px 25px;
+    transform: scaleX(1.7);
+  }
+  40% {
+    height: 8px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+.typing-shadow {
+  width: 1px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 30px;
+  transform-origin: 50%;
+  z-index: 3;
+  filter: blur(1px);
+  animation: typing-shadow046 0.5s alternate infinite ease;
+}
+
+.typing-shadow-1 {
+  left: 15%;
+}
+
+.typing-shadow-2 {
+  left: 45%;
+  animation-delay: 0.2s;
+}
+
+.typing-shadow-3 {
+  left: auto;
+  right: 15%;
+  animation-delay: 0.3s;
+}
+
+@keyframes typing-shadow046 {
+  0% {
+    transform: scaleX(1.5);
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scaleX(0.2);
+    opacity: 0.4;
+  }
 }
