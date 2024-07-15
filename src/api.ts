@@ -23,7 +23,7 @@ export async function getFineTunedResponse(prompt: string) {
           content: prompt,
         },
       ],
-      max_tokens: 100,
+      max_tokens: 50,
       temperature: 0.2,
     });
     if (
