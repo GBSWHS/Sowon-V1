@@ -3,6 +3,7 @@ import Logo from '../assets/sowon.webp';
 import '../style/Landing.scss';
 import { getFineTunedResponse } from '../api';
 import upArrow from '../assets/up-arrow.svg';
+import Square from '../assets/square.svg';
 
 const Loading = () => (
     <div className="typing-indicator">
@@ -21,6 +22,7 @@ const Landing = () => {
     const [displayedAnswer, setDisplayedAnswer] = useState('');
     const [loading, setLoading] = useState(false);
     const [showGreeting, setShowGreeting] = useState(true);
+    const [isAnswering, setIsAnswering] = useState(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +48,7 @@ const Landing = () => {
         setShowGreeting(false);
         setAnswer('');
         setDisplayedAnswer('');
+        setIsAnswering(true);
 
         try {
             const response = await getFineTunedResponse(prompt);
@@ -67,6 +70,7 @@ const Landing = () => {
                 index += 1;
                 if (index === answer.length - 1) {
                     clearInterval(interval);
+                    setIsAnswering(false);
                 }
             }, 50);
             return () => clearInterval(interval);
@@ -105,7 +109,7 @@ const Landing = () => {
                         id='submit'
                         onClick={handleSubmit}
                     >
-                        <img src={upArrow} alt="Submit" />
+                        <img src={isAnswering ? Square : upArrow} alt="Submit" />
                     </button>
                 </div>
             </div>
