@@ -34,7 +34,6 @@ body {
 
 .message-container {
   margin-top: 20px;
-  text-align: center;
 }
 
 .answer {
@@ -53,10 +52,14 @@ body {
   margin-top: 30px;
   position: relative;
   transition: box-shadow 0.3s ease-in-out;
-}
 
-.input-container:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &.has-input {
+    background-color: $white;
+  }
 }
 
 .input-box {
@@ -72,6 +75,10 @@ body {
   border-radius: 25px;
   padding: 0 15px;
   box-sizing: border-box;
+
+  &::placeholder {
+    font-size: 12px;
+  }
 }
 
 .submit {
@@ -80,7 +87,7 @@ body {
   border: none;
   border-radius: 25px;
   background-color: $darkGray;
-  color: white;
+  color: $white;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -92,21 +99,37 @@ body {
     width: 100%;
     height: 100%;
   }
+
+  &.active,
+  &:hover {
+    background-color: $white;
+    color: $darkGray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 }
 
-.submit.active {
-  background-color: #fff;
-  color: $darkGray;
-}
+.examples {
+  margin-top: 20px;
+  display: flex;
 
-.submit.has-input {
-  background-color: #ffffff;
-}
+  .example-question {
+    width: 170px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $darkGray;
+    margin: 0 10px;
+    font-size: 12px;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 
-.submit:hover {
-  background-color: #fff;
-  color: $darkGray;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-5px);
+    }
+  }
 }
 
 .typing-indicator {
@@ -200,94 +223,3 @@ body {
     opacity: 0.4;
   }
 }
-
-.examples {
-  margin-top: 20px;
-  display: flex;
-}
-
-.example-question {
-  width: 170px;
-  height: 60px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid $darkGray;
-  margin: 0 10px;
-  font-size: 12px;
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.example-question:hover {
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
-}
-
-// @media (min-width: 375px) and (max-width: 460px) {
-//   .landing {
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//   }
-
-//   .logo {
-//     width: 60px;
-//   }
-
-//   .message-container {
-//     margin-top: 20px;
-//     text-align: center;
-//   }
-
-//   .answer-ex,
-//   .answer {
-//     font-size: 14px;
-//   }
-
-//   .answer {
-//     margin-top: 20px;
-//   }
-
-//   .input-container {
-//     width: 300px;
-//     max-width: 410px;
-//     height: 40px;
-//     padding: 0 15px;
-//     background-color: $gray;
-//     display: flex;
-//     align-items: center;
-//     border-radius: 25px;
-//     margin-top: 30px;
-//     position: relative;
-//   }
-
-//   .input-container.has-input {
-//     background-color: $white;
-//   }
-
-//   .input-box {
-//     flex-grow: 1;
-//   }
-
-//   .chat-input {
-//     width: 100%;
-//     height: 100%;
-//     outline: none;
-//     border: none;
-//     background: transparent;
-//     border-radius: 25px;
-//     padding: 0 15px;
-//     box-sizing: border-box;
-//   }
-
-//   .chat-input::placeholder {
-//     font-size: 9px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//   }
-// }
