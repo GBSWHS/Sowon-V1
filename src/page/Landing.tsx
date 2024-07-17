@@ -28,9 +28,6 @@ const Landing = () => {
     const [answer, setAnswer] = useState('');
     const [displayedAnswer, setDisplayedAnswer] = useState('');
     const [loading, setLoading] = useState(false);
-    const [showGreeting, setShowGreeting] = useState(true);
-    const [isAnswering, setIsAnswering] = useState(false);
-    const [hasInput, setHasInput] = useState(false);
     const [showExamples, setShowExamples] = useState(true);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -41,24 +38,17 @@ const Landing = () => {
         }
     }, []);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            handleSubmit(e);
-        }
-    };
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPrompt(e.target.value);
-        setHasInput(e.target.value.length > 0);
     };
 
     const handleSubmit = async (e: React.FormEvent | React.KeyboardEvent) => {
         e.preventDefault();
+        if (!prompt) return;
+
         setLoading(true);
-        setShowGreeting(false);
         setAnswer('');
         setDisplayedAnswer('');
-        setIsAnswering(true);
         setShowExamples(false);
 
         try {
@@ -69,20 +59,18 @@ const Landing = () => {
         } finally {
             setLoading(false);
             setPrompt('');
-            setHasInput(false);
             focusInput();
         }
     };
 
     useEffect(() => {
         if (answer) {
-            let index = -1;
+            let index = 0;
             const interval = setInterval(() => {
                 setDisplayedAnswer(prev => prev + answer[index]);
                 index += 1;
-                if (index === answer.length - 1) {
+                if (index >= answer.length) {
                     clearInterval(interval);
-                    setIsAnswering(false);
                 }
             }, 50);
             return () => clearInterval(interval);
@@ -91,12 +79,9 @@ const Landing = () => {
 
     const handleExampleClick = (exampleAnswer: string) => {
         setLoading(true);
-        setShowGreeting(false);
         setAnswer('');
         setDisplayedAnswer('');
-        setIsAnswering(true);
         setPrompt('');
-        setHasInput(false);
         setShowExamples(false);
 
         setTimeout(() => {
@@ -113,10 +98,10 @@ const Landing = () => {
                     {loading ? (
                         <Loading />
                     ) : (
-                        showGreeting ? (
-                            <p>저희 학교에 대해 궁금하신것이 있으신가요 ? <strong>소원이</strong>에게 물어보세요 !</p>
-                        ) : (
+                        answer ? (
                             <p className='answer'>{displayedAnswer}</p>
+                        ) : (
+                            <p>저희 학교에 대해 궁금하신 것이 있으신가요? <strong>소원이</strong>에게 물어보세요!</p>
                         )
                     )}
                 </div>
@@ -133,24 +118,22 @@ const Landing = () => {
                         ))}
                     </div>
                 )}
-                <br />
                 <div className='input-container'>
                     <div className='input-box'>
                         <input
-                            placeholder="경북소프트웨어마이스터고등학교에 대해 궁금한게 있나요 ?"
+                            placeholder="경북소프트웨어마이스터고등학교에 대해 궁금한 게 있나요?"
                             className='chat-input'
                             value={prompt}
-                            onKeyDown={handleKeyDown}
                             onChange={handleInputChange}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}
                             ref={inputRef}
                         />
                     </div>
                     <button
-                        className={`submit ${hasInput ? 'has-input' : ''} ${prompt ? 'active' : ''}`}
-                        id='submit'
+                        className={`submit ${prompt ? 'active' : ''}`}
                         onClick={handleSubmit}
                     >
-                        <img src={isAnswering ? Square : upArrow} alt="Submit" />
+                        <img src={loading ? Square : upArrow} alt="Submit" />
                     </button>
                 </div>
             </div>
